@@ -6,7 +6,7 @@ export default class QuestionModel {
   #answers: AnswerModel[];
   #hasChosenRightAnswer: boolean;
 
-  constructor(ID: number, question: string, answers: AnswerModel[], hasChosenRightAnswer: boolean) {
+  constructor(ID: number, question: string, answers: AnswerModel[], hasChosenRightAnswer = false) {
     this.#ID = ID;
     this.#question = question;
     this.#answers = answers;
@@ -37,5 +37,14 @@ export default class QuestionModel {
     }
     
     return false;
+  }
+
+  toLiteralObject() {
+    return {
+      ID: this.#ID,
+      question: this.#question,
+      answers: this.#answers.map(answer => answer.toLiteralObject()),
+      hasChosenRightAnswer: this.#hasChosenRightAnswer
+    }
   }
 }
