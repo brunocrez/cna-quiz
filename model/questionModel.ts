@@ -1,20 +1,20 @@
 import AnswerModel from './answerModel';
 
 export default class QuestionModel {
-  #ID: number;
+  #code: number;
   #question: string;
   #answers: AnswerModel[];
   #hasChosenRightAnswer: boolean;
 
-  constructor(ID: number, question: string, answers: AnswerModel[], hasChosenRightAnswer = false) {
-    this.#ID = ID;
+  constructor(code: number, question: string, answers: AnswerModel[], hasChosenRightAnswer = false) {
+    this.#code = code;
     this.#question = question;
     this.#answers = answers;
     this.#hasChosenRightAnswer = hasChosenRightAnswer;
   }
 
-  get ID() {
-    return this.#ID;
+  get code() {
+    return this.#code;
   }
 
   get question() {
@@ -41,7 +41,7 @@ export default class QuestionModel {
 
   toLiteralObject() {
     return {
-      ID: this.#ID,
+      code: this.#code,
       question: this.#question,
       answers: this.#answers.map(answer => answer.toLiteralObject()),
       hasChosenRightAnswer: this.#hasChosenRightAnswer
