@@ -1,4 +1,6 @@
-// TO DO: implement this endpoint
+import { questions } from '../../../questions';
+
 export default (req, res) => {
-  res.status(200).json({ name: 'ALL QUESTIONS HERE' })
+  const result = questions.map(question => question.toLiteralObject());
+  res.status(200).json(result);
 }

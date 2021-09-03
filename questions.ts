@@ -6,6 +6,12 @@ export const questions: QuestionModel[] = [
     AnswerModel.isTheWrongOne('Abelha'),
     AnswerModel.isTheWrongOne('Pato'),
     AnswerModel.isTheWrongOne('Rato'),
-    AnswerModel.isTheRightOne('Mosquito'),
+    AnswerModel.isTheRightOne('Mosquito')
+  ]),
+  new QuestionModel(302, 'Qual estado é conhecido por fazer pão de queijo?', [
+    AnswerModel.isTheWrongOne('São Paulo'),
+    AnswerModel.isTheWrongOne('Amazonas'),
+    AnswerModel.isTheRightOne('Minas Gerais'),
+    AnswerModel.isTheWrongOne('Rio Grande do Sul')
   ])
 ];
