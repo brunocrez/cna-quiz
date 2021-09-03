@@ -11,7 +11,7 @@ export const questions: QuestionModel[] = [
   new QuestionModel(302, 'Qual estado é conhecido por fazer pão de queijo?', [
     AnswerModel.isTheWrongOne('São Paulo'),
     AnswerModel.isTheWrongOne('Amazonas'),
-    AnswerModel.isTheRightOne('Minas Gerais'),
-    AnswerModel.isTheWrongOne('Rio Grande do Sul')
+    AnswerModel.isTheWrongOne('Rio Grande do Sul'),
+    AnswerModel.isTheRightOne('Minas Gerais')
   ])
 ];
