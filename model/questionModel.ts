@@ -45,12 +45,24 @@ export default class QuestionModel {
     return new QuestionModel(this.#code, this.#question, scrumbledAnswers, this.#hasChosenRightAnswer);
   }
 
+  answerQuestion(option: number): QuestionModel {
+    const isOptionRight = this.#answers[option].isCorrect;
+    const newAnswers = this.answers.map((answer, idx) => {
+      const selectedAnswer = option === idx;
+      const shouldShow = selectedAnswer || answer.isCorrect;
+      return shouldShow ? answer.showAnswer() : answer;
+    });
+
+    return new QuestionModel(this.#code, this.#question, newAnswers, isOptionRight);
+  }
+
   toLiteralObject() {
     return {
       code: this.#code,
       question: this.#question,
-      answers: this.#answers.map(answer => answer.toLiteralObject()),
-      hasChosenRightAnswer: this.#hasChosenRightAnswer
+      hasChosenRightAnswer: this.#hasChosenRightAnswer,
+      hasAnswered: this.hasAnswered,
+      answers: this.#answers.map(answer => answer.toLiteralObject())
     }
   }
 }

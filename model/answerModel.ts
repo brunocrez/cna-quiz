@@ -29,6 +29,10 @@ export default class AnswerModel {
     return this.#hasShown;
   }
 
+  showAnswer() {
+    return new AnswerModel(this.#value, this.#isCorrect, true);
+  }
+
   toLiteralObject() {
     return {
       value: this.#value,
