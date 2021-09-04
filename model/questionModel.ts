@@ -1,3 +1,4 @@
+import { scrumble } from '../functions/array';
 import AnswerModel from './answerModel';
 
 export default class QuestionModel {
@@ -37,6 +38,11 @@ export default class QuestionModel {
     }
     
     return false;
+  }
+
+  scrambleAnswers() {
+    const scrumbledAnswers = scrumble(this.#answers);
+    return new QuestionModel(this.#code, this.#question, scrumbledAnswers, this.#hasChosenRightAnswer);
   }
 
   toLiteralObject() {

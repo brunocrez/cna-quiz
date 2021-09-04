@@ -5,8 +5,9 @@ export default (req, res) => {
 
   const selectedQuestion = questions.filter(question => question.code === Number(code));
 
-  if (selectedQuestion.length === 1) {    
-    res.status(200).json(selectedQuestion[0].toLiteralObject());
+  if (selectedQuestion.length === 1) {
+    const result = selectedQuestion[0].scrambleAnswers();
+    res.status(200).json(result.toLiteralObject());
   } else {
     res.status(204).send();
   }
