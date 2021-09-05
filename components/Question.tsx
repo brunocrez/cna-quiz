@@ -1,5 +1,9 @@
 import styles from '../styles/Question.module.css';
 
+// components
+import Asking from './Asking';
+
+// models
 import QuestionModel from '../model/questionModel';
 
 interface QuestionProps {
@@ -7,9 +11,11 @@ interface QuestionProps {
 }
 
 export default function Question(props: QuestionProps) {
+  const element = props.value;
+
   return (
     <div className={styles.question}>
-      <h1>Question</h1>
+      <Asking text={element.question} />
     </div>
   );
 }
