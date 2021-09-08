@@ -15,7 +15,8 @@ const options = [
 ];
 
 interface QuestionProps {
-  value: QuestionModel
+  value: QuestionModel;
+  onChoose: (index: number) => void;
 }
 
 export default function Question(props: QuestionProps) {
@@ -29,7 +30,8 @@ export default function Question(props: QuestionProps) {
           value={answer}
           index={idx}
           option={options[idx].value}
-          backgroundColorOption={options[idx].color} />
+          backgroundColorOption={options[idx].color}
+          onChoose={props.onChoose} />
         );
     });
   }
@@ -37,7 +39,7 @@ export default function Question(props: QuestionProps) {
   return (
     <div className={styles.question}>
       <QuestionTitle text={element.question} />
-      {renderAnswers()}
+      { renderAnswers() }
     </div>
   );
 }

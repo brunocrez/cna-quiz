@@ -27,6 +27,27 @@
   border-radius: 12px;
 }
 
+.backContent > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 12px;
+}
+
+.correct {
+  background-color: #2BAA6D;
+}
+
+.wrong {
+  background-color: #E44A4C;
+}
+
+.correct .value, .wrong .value {
+  font-size: 1.75rem;
+}
+
 .option {
   display: flex;
   justify-content: center;

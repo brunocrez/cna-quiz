@@ -1,5 +1,7 @@
 import styles from '../styles/Screen.module.css';
 
+import { useState } from 'react';
+
 // components
 import Question from '../components/Question';
 
@@ -7,16 +9,24 @@ import Question from '../components/Question';
 import AnswerModel from '../model/answerModel';
 import QuestionModel from '../model/questionModel';
 
+const mockQuestion = new QuestionModel(1, 'Best collor ever?', [
+  AnswerModel.isTheWrongOne('Purple'),
+  AnswerModel.isTheWrongOne('Black'),
+  AnswerModel.isTheWrongOne('Green'),
+  AnswerModel.isTheRightOne('Blue')
+]);
+
 export default function Screen() {
-  const testQuestion = new QuestionModel(1, 'Best collor ever?', [
-    AnswerModel.isTheWrongOne('Purple'),
-    AnswerModel.isTheWrongOne('Black'),
-    AnswerModel.isTheWrongOne('Green'),
-    AnswerModel.isTheRightOne('Blue'),
-  ])
+  const [question, setQuestion] = useState(mockQuestion);
+
+  function onChoose(index: number) {
+    console.log(index);
+    setQuestion(question.answerQuestion(index));
+  }
+
   return (
     <div className={styles.screen}>
-      <Question value={testQuestion} />
+      <Question value={question} onChoose={onChoose} />
     </div>
   )
 }
