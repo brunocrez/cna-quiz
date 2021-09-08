@@ -7,6 +7,13 @@ import QuestionAnswer from './QuestionAnswer';
 // models
 import QuestionModel from '../model/questionModel';
 
+const options = [
+  { value: 'A', color: '#F2C866' },
+  { value: 'B', color: '#F266BA' },
+  { value: 'C', color: '#85D4F2' },
+  { value: 'D', color: '#BCE596' }
+];
+
 interface QuestionProps {
   value: QuestionModel
 }
@@ -16,7 +23,14 @@ export default function Question(props: QuestionProps) {
 
   const renderAnswers = () => {
     return element.answers.map((answer, idx) => {
-      return <QuestionAnswer key={idx} value={answer} index={idx} option="A" backgroundColorOption="#FC2A66" />
+      return (
+        <QuestionAnswer
+          key={idx}
+          value={answer}
+          index={idx}
+          option={options[idx].value}
+          backgroundColorOption={options[idx].color} />
+        );
     });
   }
 
