@@ -1,4 +1,4 @@
-import styles from '../styles/QuestionTitle.module.css';
+import styles from '../styles/QuestionAnswer.module.css';
 
 // models
 import AnswerModel from '../model/answerModel';
@@ -7,7 +7,7 @@ interface QuestionAnswerProps {
   value: AnswerModel;
   index: number;
   option: string;
-  optionColor: string;
+  backgroundColorOption: string;
 }
 
 export default function QuestionAnswer(props: QuestionAnswerProps) {
@@ -17,7 +17,7 @@ export default function QuestionAnswer(props: QuestionAnswerProps) {
     <div className={styles.answer}>
       <div className={styles.answerContent}>
         <div className={styles.frontContent}>
-          <div className={styles.option}>
+          <div className={styles.option} style={{ backgroundColor: props.backgroundColorOption }}>
             {props.option}
           </div>
           <div className={styles.value}>

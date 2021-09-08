@@ -16,7 +16,7 @@ export default function Question(props: QuestionProps) {
 
   const renderAnswers = () => {
     return element.answers.map((answer, idx) => {
-      return <QuestionAnswer key={idx} value={answer} index={idx} option="A" optionColor="#FC2A66" />
+      return <QuestionAnswer key={idx} value={answer} index={idx} option="A" backgroundColorOption="#FC2A66" />
     });
   }
 
