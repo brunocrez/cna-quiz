@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 // components
 import Question from '../components/Question';
+import Button from '../components/Button';
 
 // models
 import AnswerModel from '../model/answerModel';
@@ -36,7 +37,8 @@ export default function Screen() {
         value={question}
         onChoose={onChoose}
         timeIsOver={timeIsOver}
-        timeToAnswer={15} />
+        timeToAnswer={3} />
+      <Button text='Próxima Questão' />
     </div>
   )
 }

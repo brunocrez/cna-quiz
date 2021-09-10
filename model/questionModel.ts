@@ -45,8 +45,8 @@ export default class QuestionModel {
     return new QuestionModel(this.#code, this.#question, scrumbledAnswers, this.#hasChosenRightAnswer);
   }
 
-  answerQuestion(option: number): QuestionModel {
-    const isOptionRight = this.#answers[option].isCorrect;
+  answerQuestion(option: number): QuestionModel {    
+    const isOptionRight = this.#answers[option]?.isCorrect;
     const newAnswers = this.answers.map((answer, idx) => {
       const selectedAnswer = option === idx;
       const shouldShow = selectedAnswer || answer.isCorrect;
