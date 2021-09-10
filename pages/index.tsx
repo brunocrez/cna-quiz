@@ -24,9 +24,19 @@ export default function Screen() {
     setQuestion(question.answerQuestion(index));
   }
 
+  function timeIsOver() {
+    if (!question.hasChosenRightAnswer) {
+      setQuestion(question.answerQuestion(-1));
+    }
+  }
+
   return (
     <div className={styles.screen}>
-      <Question value={question} onChoose={onChoose} />
+      <Question
+        value={question}
+        onChoose={onChoose}
+        timeIsOver={timeIsOver}
+        timeToAnswer={15} />
     </div>
   )
 }

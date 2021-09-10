@@ -3,6 +3,7 @@ import styles from '../styles/Question.module.css';
 // components
 import QuestionTitle from './QuestionTitle';
 import QuestionAnswer from './QuestionAnswer';
+import Timer from './Timer';
 
 // models
 import QuestionModel from '../model/questionModel';
@@ -17,6 +18,8 @@ const options = [
 interface QuestionProps {
   value: QuestionModel;
   onChoose: (index: number) => void;
+  timeIsOver: () => void;
+  timeToAnswer?: number;
 }
 
 export default function Question(props: QuestionProps) {
@@ -39,6 +42,7 @@ export default function Question(props: QuestionProps) {
   return (
     <div className={styles.question}>
       <QuestionTitle text={element.question} />
+      <Timer duration={props.timeToAnswer ?? 10} timeIsOver={props.timeIsOver} />
       { renderAnswers() }
     </div>
   );
