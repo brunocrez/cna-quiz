@@ -7,4 +7,10 @@
   padding: 10px 25px;
   font-size: 1.25rem;
   margin-top: 45px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.15);
 }
