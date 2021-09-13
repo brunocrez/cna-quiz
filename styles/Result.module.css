@@ -1,0 +1,12 @@
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  font-size: 2rem;
+}
+
+.displays {
+  display: flex;
+}
