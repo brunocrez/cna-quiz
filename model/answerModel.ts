@@ -33,6 +33,10 @@ export default class AnswerModel {
     return new AnswerModel(this.#value, this.#isCorrect, true);
   }
 
+  static fromObject(obj: AnswerModel): AnswerModel {
+    return new AnswerModel(obj.value, obj.isCorrect, obj.hasShown);
+  }
+
   toLiteralObject() {
     return {
       value: this.#value,

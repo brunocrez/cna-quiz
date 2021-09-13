@@ -56,6 +56,11 @@ export default class QuestionModel {
     return new QuestionModel(this.#code, this.#question, newAnswers, isOptionRight);
   }
 
+  static fromObject(obj: QuestionModel): QuestionModel {
+    const answers = obj.answers.map(answer => AnswerModel.fromObject(answer));
+    return new QuestionModel(obj.code, obj.question, answers, obj.hasChosenRightAnswer);
+  }
+
   toLiteralObject() {
     return {
       code: this.#code,
