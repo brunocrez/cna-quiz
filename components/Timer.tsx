@@ -4,6 +4,7 @@ import styles from '../styles/Timer.module.css';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 interface TimerProps {
+  key: number;
   duration: number;
   timeIsOver: () => void;
 }

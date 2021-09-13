@@ -1,26 +1,21 @@
 import styles from '../styles/Screen.module.css';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 // components
 import Quiz from '../components/Quiz';
 
 // models
-import AnswerModel from '../model/answerModel';
 import QuestionModel from '../model/questionModel';
-
-const mockQuestion = new QuestionModel(1, 'Best collor ever?', [
-  AnswerModel.isTheWrongOne('Purple'),
-  AnswerModel.isTheWrongOne('Black'),
-  AnswerModel.isTheWrongOne('Green'),
-  AnswerModel.isTheRightOne('Blue')
-]);
 
 const BASE_URL = 'http://localhost:3000/api'
 
 export default function Screen() {
-  const [question, setQuestion] = useState(mockQuestion);
+  const router = useRouter();  
+  const [question, setQuestion] = useState(null);
   const [questionCodes, setQuestionCodes] = useState<number[]>([]);
+  const [rightAnswers, setRightAnswers] = useState(0);
 
   async function loadQuestionCodes() {
     const response = await fetch(`${BASE_URL}/quiz`);
@@ -43,21 +38,45 @@ export default function Screen() {
   }, [questionCodes]);
 
   function onChoose(question: QuestionModel) {
+    setQuestion(question);
+    const hasChosenRightAnswer = question.hasChosenRightAnswer;
+    setRightAnswers(rightAnswers + (hasChosenRightAnswer ? 1 : 0));
+  }
 
+  function getNextQuestionCode() {
+    const nextIndex = questionCodes.indexOf(question.code) + 1;
+    return questionCodes[nextIndex];
   }
 
   function nextStep() {
+    const nextIndex = getNextQuestionCode();
+    nextIndex ? goToNextQuestion(nextIndex) : completeQuiz();
+  }
 
+  function goToNextQuestion(index: number) {
+    loadQuestion(index);
+  }
+
+  function completeQuiz() {
+    router.push({
+      pathname: '/result',
+      query: {
+        total: questionCodes.length,
+        rightAnswers
+      }
+    });
   }
 
   return (
     <div className={styles.screen}>
-      <Quiz
-        question={question}
-        isTheLastOne={true}
-        onChoose={onChoose}
-        nextStep={nextStep}
-      />
+      { question ? 
+        <Quiz
+          question={question}
+          isTheLastOne={getNextQuestionCode() === undefined}
+          onChoose={onChoose}
+          nextStep={nextStep}
+        /> : false
+      }      
     </div>
   )
 }
