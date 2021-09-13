@@ -4,12 +4,19 @@
   width: 80%;
   height: 100px;
   margin: 12px;
+  perspective: 1000px;
 }
 
 .answerContent {
   position: relative;
   display: flex;
   flex: 1;
+  transition: transform 750ms;
+  transform-style: preserve-3d;
+}
+
+.answerContent.hasShown {
+  transform: rotateY(180deg);
 }
 
 .frontContent, .backContent {
@@ -17,6 +24,9 @@
   display: flex;
   height: 100%;
   width: 100%;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .frontContent {
@@ -25,6 +35,10 @@
   background-color: #FFF;
   padding: 15px;
   border-radius: 12px;
+}
+
+.backContent {
+  transform: rotateY(180deg);
 }
 
 .backContent > div {
