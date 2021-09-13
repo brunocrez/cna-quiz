@@ -1,10 +1,9 @@
 import styles from '../styles/Screen.module.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // components
-import Question from '../components/Question';
-import Button from '../components/Button';
+import Quiz from '../components/Quiz';
 
 // models
 import AnswerModel from '../model/answerModel';
@@ -17,28 +16,48 @@ const mockQuestion = new QuestionModel(1, 'Best collor ever?', [
   AnswerModel.isTheRightOne('Blue')
 ]);
 
+const BASE_URL = 'http://localhost:3000/api'
+
 export default function Screen() {
   const [question, setQuestion] = useState(mockQuestion);
+  const [questionCodes, setQuestionCodes] = useState<number[]>([]);
 
-  function onChoose(index: number) {
-    console.log(index);
-    setQuestion(question.answerQuestion(index));
+  async function loadQuestionCodes() {
+    const response = await fetch(`${BASE_URL}/quiz`);
+    const questionCodes = await response.json();
+    setQuestionCodes(questionCodes);
   }
 
-  function timeIsOver() {
-    if (!question.hasChosenRightAnswer) {
-      setQuestion(question.answerQuestion(-1));
-    }
+  async function loadQuestion(code: number) {
+    const response = await fetch(`${BASE_URL}/questions/${code}`);
+    const question = await response.json();
+    setQuestion(QuestionModel.fromObject(question));
+  }
+
+  useEffect(() => {
+    loadQuestionCodes();
+  }, []);
+
+  useEffect(() => {
+    questionCodes.length > 0 && loadQuestion(questionCodes[0]);
+  }, [questionCodes]);
+
+  function onChoose(question: QuestionModel) {
+
+  }
+
+  function nextStep() {
+
   }
 
   return (
     <div className={styles.screen}>
-      <Question
-        value={question}
+      <Quiz
+        question={question}
+        isTheLastOne={true}
         onChoose={onChoose}
-        timeIsOver={timeIsOver}
-        timeToAnswer={3} />
-      <Button text='Próxima Questão' />
+        nextStep={nextStep}
+      />
     </div>
   )
 }
